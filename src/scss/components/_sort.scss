@@ -1,6 +1,7 @@
 @import '../variables';
 
 .sort {
+  margin-left: 20px;
   position: relative;
   &__label {
     display: flex;
@@ -8,6 +9,7 @@
 
     svg {
       margin-right: 8px;
+      transform: rotate(180deg);
     }
 
     b {
@@ -30,7 +32,6 @@
     border-radius: 10px;
     overflow: hidden;
     padding: 10px 0;
-    width: 160px;
 
     ul {
       overflow: hidden;

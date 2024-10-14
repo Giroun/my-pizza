@@ -13,17 +13,19 @@
       border-radius: 50%;
       cursor: pointer;
       color: #fe5f1e;
+
       & :hover {
         color: #fff;
-        background: #fe5f1e;
+        background-color: #fe5f1e;
       }
     }
   }
+
   :global{
     .selected {
       a{
         color: #fff;
-      background: #fe5f1e;
+      background-color: #fe5f1e;
       }
     }
   }

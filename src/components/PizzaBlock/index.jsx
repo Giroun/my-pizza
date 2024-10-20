@@ -5,11 +5,10 @@ import { addItem } from '../../redux/slices/cartSlice';
 const typeNames = ['тонкое', 'традиционное'];
 function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
   const dispatch = useDispatch();
+
   const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
   const [activeSizes, setActiveSizes] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
-
-  console.log(cartItem);
 
   const addedCount = cartItem ? cartItem.count : '';
 

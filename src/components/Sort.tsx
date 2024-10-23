@@ -1,20 +1,20 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setSortType, sortSelector } from '../redux/slices/filterSlice';
+import { setSortType, sortSelector, SortPropertyEnum } from '../redux/slices/filterSlice';
 
 type TypeList = {
   name: string;
-  sortProperty: string;
+  sortProperty: SortPropertyEnum;
 };
 
 export const list: TypeList[] = [
-  { name: 'популярности(по возрастанию)', sortProperty: 'rating' },
-  { name: 'популярности(по убыванию)', sortProperty: '-rating' },
-  { name: 'цене(по возрастанию)', sortProperty: 'price' },
-  { name: 'цене(по убыванию)', sortProperty: '-price' },
-  { name: 'алфавиту(по возрастанию)', sortProperty: 'title' },
-  { name: 'алфавиту(по убыванию)', sortProperty: '-title' },
+  { name: 'популярности(по возрастанию)', sortProperty: SortPropertyEnum.RATING_P },
+  { name: 'популярности(по убыванию)', sortProperty: SortPropertyEnum.RATING_M },
+  { name: 'цене(по возрастанию)', sortProperty: SortPropertyEnum.PRICE_P },
+  { name: 'цене(по убыванию)', sortProperty: SortPropertyEnum.PRICE_M },
+  { name: 'алфавиту(по возрастанию)', sortProperty: SortPropertyEnum.TITLE_P },
+  { name: 'алфавиту(по убыванию)', sortProperty: SortPropertyEnum.TITLE_M },
 ];
 
 const Sort: React.FC = () => {
@@ -30,8 +30,8 @@ const Sort: React.FC = () => {
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!event.composedPath().includes(sortRef.current!)) {
         setOpen(false);
       }
     };

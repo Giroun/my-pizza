@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { filterSelector, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
-import { pizzaDataSelector } from '../redux/slices/pizzaSlice';
+import { pizzaDataSelector, fetchPizzas } from '../redux/slices/pizzaSlice';
 
 import Pagination from '../components/Pagination';
 import Sort from '../components/Sort';
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import { useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
   const { sort, categoryId, searchValue } = useSelector(filterSelector);
   const { items, loading, errorStatus } = useSelector(pizzaDataSelector);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch<any>();
   const sortType = sort.sortProperty;
   const currentPage = useSelector((state: any) => state.filter.currentPage);
 
@@ -26,22 +27,17 @@ const Home: React.FC = () => {
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
-
   React.useEffect(() => {
     dispatch(
-      // @ts-ignore
-      (fetchPizzas = {
+      fetchPizzas({
         sortType,
         categoryId,
         searchValue,
         currentPage,
       }),
     );
-  }, [categoryId, sortType, searchValue, currentPage, dispatch]);
-
-  React.useEffect(() => {
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, searchValue, currentPage, sortType, dispatch]);
 
   return (
     <>

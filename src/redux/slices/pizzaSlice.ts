@@ -34,7 +34,7 @@ export const fetchPizzas = createAsyncThunk<PizzaItems[], FetchPizzaArgs>(
         searchValue ? `&title=${searchValue}` : ''
       }&_sort=${sortType}&_page=${currentPage}&_per_page=4`,
     );
-    return data.data;
+    return data.data as PizzaItems[];
   },
 );
 
@@ -75,7 +75,5 @@ const pizzaSlice = createSlice({
 });
 
 export const pizzaDataSelector = (state: RootState) => state.pizza;
-
-// export const { setItems } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

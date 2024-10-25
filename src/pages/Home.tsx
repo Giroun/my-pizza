@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import { filterSelector, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
@@ -16,13 +15,16 @@ const Home: React.FC = () => {
   const { sort, categoryId, searchValue } = useSelector(filterSelector);
   const { items, loading, errorStatus } = useSelector(pizzaDataSelector);
 
-  const dispatch = useAppDispatch<any>();
+  const dispatch = useAppDispatch();
   const sortType = sort.sortProperty;
   const currentPage = useSelector((state: any) => state.filter.currentPage);
 
-  const onChangeCategory = (id: number) => {
-    dispatch(setCategoryId(id));
-  };
+  const onChangeCategory = React.useCallback(
+    (id: number) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch],
+  );
 
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -64,11 +66,7 @@ const Home: React.FC = () => {
         <div className="content__items">
           {loading
             ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
-            : items.map((obj: any) => (
-                <Link key={obj.id} to={`/pizza/${obj.id}`}>
-                  <PizzaBlock {...obj} />
-                </Link>
-              ))}
+            : items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />)}
         </div>
       </div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />

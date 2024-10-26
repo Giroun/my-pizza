@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CartItem, addItem } from '../../redux/slices/cartSlice';
+import { addItem } from '../../redux/cart/slice';
+import { CartItem } from '../../redux/cart/types';
 import { RootState } from '../../redux/store';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +33,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, siz
       title,
       imageUrl,
       price,
-      type: activeType,
+      type: typeNames[activeType],
       size: sizes[activeSizes],
       count: 0,
     };

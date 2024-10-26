@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { useSelector } from 'react-redux';
-import { filterSelector, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
-import { pizzaDataSelector, fetchPizzas } from '../redux/slices/pizzaSlice';
+import { filterSelector } from '../redux/filter/selectors';
+import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
+import { fetchPizzas } from '../redux/pizza/slice';
+import { pizzaDataSelector } from '../redux/pizza/selectors';
 
 import Pagination from '../components/Pagination';
 import Sort from '../components/Sort';

@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import filter from './slices/filterSlice';
-import cart from './slices/cartSlice';
-import pizza from './slices/pizzaSlice';
+import filter from './filter/slice';
+import cart from './cart/slice';
+import pizza from './pizza/slice';
 import { useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import logger from 'redux-logger';
 
 const persistConfigPizza = {
   key: 'pizza',
@@ -20,9 +19,9 @@ const persistConfigFilter = {
   storage,
 };
 
-const persistedReducerPizza = persistReducer(persistConfigPizza, pizza);
-const persistedReducerCart = persistReducer(persistConfigCart, cart);
-const persistedReducerFilter = persistReducer(persistConfigFilter, filter);
+export const persistedReducerPizza = persistReducer(persistConfigPizza, pizza);
+export const persistedReducerCart = persistReducer(persistConfigCart, cart);
+export const persistedReducerFilter = persistReducer(persistConfigFilter, filter);
 
 export const store = configureStore({
   reducer: {
@@ -33,7 +32,7 @@ export const store = configureStore({
     persistedReducerCart,
     persistedReducerFilter,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export const persistor = persistStore(store);
